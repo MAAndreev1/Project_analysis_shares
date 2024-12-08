@@ -1,5 +1,4 @@
 import yfinance as yf
-import csv
 
 
 def fetch_stock_data(ticker, period='1mo'):
