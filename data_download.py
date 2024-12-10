@@ -20,6 +20,23 @@ def add_moving_average(data, window_size=5):
     return data
 
 
+def add_relative_strength_index(data, window_size=5, adjust = False):
+    """
+        Добавляет в DataFrame колонку с показателем RSI, рассчитанным на основе цен закрытия.
+    """
+    delta = data['Close'].diff(1).dropna()
+    loss = delta.copy()
+    gains = delta.copy()
+    gains[gains < 0] = 0
+    loss[loss > 0] = 0
+    gain_ewm = gains.ewm(com = window_size - 1, adjust = adjust).mean()
+    loss_ewm = abs(loss.ewm(com = window_size - 1, adjust = adjust).mean())
+    rs = gain_ewm / loss_ewm
+    rsi = 100 - 100 / (1 + rs)
+    data['RSI'] = rsi
+    return data
+
+
 def calculate_and_display_average_price(data):
     """
         Принимать DataFrame.
