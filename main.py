@@ -1,5 +1,6 @@
 import data_download as dd
 import data_plotting as dplt
+from datetime import datetime
 import matplotlib.pyplot as plt
 
 
@@ -16,39 +17,33 @@ def main():
           "1д, 5д, 1мес, 3мес, 6мес, 1г, 2г, 5г, 10л, с начала года, макс.")
 
 
-    ticker = 'AAPL'
-    period = 'max'
-    start_date = '2020-01-01'
-    end_date = '2024-01-01'
-    threshold = 5
+# -- ПОЛУЧЕНИЕ ВХОДНЫХ ДАННЫХ
+    ticker = input("Введите тикер акции (например, «AAPL» для Apple Inc): ")
+    period = input("Введите период для данных (например, '1mo' для одного месяца): ")
 
-#-- ПОЛУЧЕНИЕ ВХОДНЫХ ДАННЫХ
-    # ticker = input("Введите тикер акции (например, «AAPL» для Apple Inc): ")
-    # period = input("Введите период для данных (например, '1mo' для одного месяца): ")
-    #
-    # while True:
-    #     start_date = input("Введите дату начала анализа в формате (YYYY-MM-DD)")
-    #     try:
-    #         if bool(datetime.strptime(start_date, "%Y-%m-%d")):
-    #             break
-    #     except ValueError:
-    #         print("Введено неверное значение!")
-    #
-    # while True:
-    #     end_date = input("Введите дату окончания анализа в формате (YYYY-MM-DD)")
-    #     try:
-    #         if bool(datetime.strptime(end_date, "%Y-%m-%d")):
-    #             break
-    #     except ValueError:
-    #         print("Введено неверное значение!")
-    #
-    # while True:
-    #     threshold = input("Введите процент допустимых колебаний закрытия (целое число, например '5' для 'пяти %'): ")
-    #     if  threshold.isdigit():
-    #         threshold = float(threshold)
-    #         break
-    #     else:
-    #         print("Введено неверное значение!")
+    while True:
+        start_date = input("Введите дату начала анализа в формате (YYYY-MM-DD)")
+        try:
+            if bool(datetime.strptime(start_date, "%Y-%m-%d")):
+                break
+        except ValueError:
+            print("Введено неверное значение!")
+
+    while True:
+        end_date = input("Введите дату окончания анализа в формате (YYYY-MM-DD)")
+        try:
+            if bool(datetime.strptime(end_date, "%Y-%m-%d")):
+                break
+        except ValueError:
+            print("Введено неверное значение!")
+
+    while True:
+        threshold = input("Введите процент допустимых колебаний закрытия (целое число, например '5' для 'пяти %'): ")
+        if  threshold.isdigit():
+            threshold = float(threshold)
+            break
+        else:
+            print("Введено неверное значение!")
 
     while True:
         style = input(f'Выберете один из следующих стилей (можно оставить пустым):{plt.style.available}\n>>> ')
