@@ -2,13 +2,15 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-def create_and_save_plot(data, ticker, period, filename=None):
+def create_and_save_plot(data, ticker, period, style, filename=None):
     """
         Создаёт график, отображающий цены закрытия и скользящие средние.
         Предоставляет возможность сохранения графика в файл.
         Параметр filename опционален; если он не указан, имя файла генерируется автоматически.
     """
     plt.figure(figsize=(10, 6))
+    if style != '':
+        plt.style.use(style=style)
 
     if 'Date' not in data:
         if pd.api.types.is_datetime64_any_dtype(data.index):
