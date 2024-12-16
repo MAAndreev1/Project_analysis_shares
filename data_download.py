@@ -1,4 +1,5 @@
 import yfinance as yf
+import numpy as np
 
 
 def fetch_stock_data(ticker, period='1mo', start=None, end=None):
@@ -37,6 +38,15 @@ def add_relative_strength_index(data, window_size=5, adjust = False):
     rs = gain_ewm / loss_ewm
     rsi = 100 - 100 / (1 + rs)
     data['RSI'] = rsi
+    return data
+
+
+def add_(data, window_size=5):
+    """
+        Добавляет в DataFrame колонку с показателем std, стандартное отклонение закрытия.
+    """
+    stocks_data = data["Close"]
+    data['std'] = np.std(stocks_data)
     return data
 
 

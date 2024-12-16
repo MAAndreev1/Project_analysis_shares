@@ -24,7 +24,9 @@ def main():
     while True:
         start_date = input("Введите дату начала анализа в формате (YYYY-MM-DD)")
         try:
-            if bool(datetime.strptime(start_date, "%Y-%m-%d")):
+            if start_date == "" or bool(datetime.strptime(start_date, "%Y-%m-%d")):
+                if start_date == "":
+                    start_date = '2023-01-01'
                 break
         except ValueError:
             print("Введено неверное значение!")
@@ -32,14 +34,18 @@ def main():
     while True:
         end_date = input("Введите дату окончания анализа в формате (YYYY-MM-DD)")
         try:
-            if bool(datetime.strptime(end_date, "%Y-%m-%d")):
+            if end_date == "" or bool(datetime.strptime(end_date, "%Y-%m-%d")):
+                if end_date == "":
+                    end_date = '2024-01-01'
                 break
         except ValueError:
             print("Введено неверное значение!")
 
     while True:
         threshold = input("Введите процент допустимых колебаний закрытия (целое число, например '5' для 'пяти %'): ")
-        if  threshold.isdigit():
+        if  threshold == "" or threshold.isdigit():
+            if threshold == "":
+                threshold = 5
             threshold = float(threshold)
             break
         else:
@@ -60,6 +66,9 @@ def main():
 
     # Add RSI to the data
     stock_data = dd.add_relative_strength_index(stock_data)
+
+    # Add _ to the data
+    stock_data = dd.add_(stock_data)
 
     # Plot the data
     dplt.create_and_save_plot(stock_data, ticker, period, style)
