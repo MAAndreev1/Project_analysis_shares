@@ -1,5 +1,6 @@
 import data_download as dd
 import data_plotting as dplt
+import data_plotly as pl
 from datetime import datetime
 import matplotlib.pyplot as plt
 
@@ -18,8 +19,11 @@ def main():
 
 
 # -- ПОЛУЧЕНИЕ ВХОДНЫХ ДАННЫХ
-    ticker = input("Введите тикер акции (например, «AAPL» для Apple Inc): ")
-    period = input("Введите период для данных (например, '1mo' для одного месяца): ")
+    #     ticker = input("Введите тикер акции (например, «AAPL» для Apple Inc): ")
+    #     period = input("Введите период для данных (например, '1mo' для одного месяца): ")
+
+    ticker = "AAPL"
+    period = "1y"
 
     while True:
         start_date = input("Введите дату начала анализа в формате (YYYY-MM-DD)")
@@ -81,6 +85,9 @@ def main():
 
     # Export to CSV
     dplt.export_data_to_csv(stock_data, "out")
+
+    #
+    pl.create_plotly(stock_data)
 
 
 if __name__ == "__main__":
